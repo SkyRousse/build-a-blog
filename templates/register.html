@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Register to become a contributor</h1>
+    <form class='registration-form' action='/register' method='POST'>
+        <lable>
+            Email
+            <input type='email' value='{{ email }}' />
+        </lable>
+        <label>
+            Password
+            <input type='password' name='password' />
+        </label>
+        <label>
+            Verify Password
+            <input type='password' name='verify' />
+        </label>
+    </form>
+{% endblock %}

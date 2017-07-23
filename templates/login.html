@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Login to contribute</h1>
+    <form class='login-form' action='/login' method='POST'>
+        <lable>
+            Email
+            <input type='email' name='email' value='{{ email }}' />
+        </lable>
+        <label>
+            Password
+            <input type='password' name='password' />
+        </label>
+        <button type='submit'>Login</button>
+    </form>
+    <p>If you don't have an account yet <a href="url_for('register')" alt='registration link'>register here</a>
+{% endblock %}

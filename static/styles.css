@@ -1,0 +1,31 @@
+nav {
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 10px;
+    padding: 5px 10px;
+    border: 1px solid gray;
+}
+
+nav a {
+    text-decoration: none;
+    color: hotpink;
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
+
+.warning {
+    color: orange;
+}
+
+div.post {
+    margin: 0px 0px 20px 0px;
+}

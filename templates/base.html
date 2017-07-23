@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ title }}</title>
+        <link type='text/css' rel='stylsheet' href="{{ url_for('static', filename='styles.css') }}" />
+    </head>
+    <body>
+        <nav class='top-menu'>
+            <ul>
+                <li><a href='/' alt='home'>PyBlog</a></li>
+                {% if session['email']}
+                    <li><a href="{{ url_for('logout') }}" alt='log out'>Log out</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}" alt='log in'>Login</a></li>
+                    <li><a href="{{ url_for('register') }}" alt='register'>Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            <ul class='flash-errors'>
+                {% for category, message in messages %}
+                    <li class='{{ category }}'>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endwith %}
+
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,19 @@
+<h1>Add a new post</h1>
+
+<form class='add_post' action='/add_post' method='POST'>
+    <lable>
+        Title
+        <input type='text' name='post-title' />
+    </lable>
+    <label>
+        Body
+        <textarea name='post-body'></textarea>
+    </label>
+    <label>
+        Category
+        <select name='post-category'>
+            {% for category in categories %}
+                <option value='{{ category }}'>{{ category }}</option>
+            {% endfor %}
+        </select>
+</form>
