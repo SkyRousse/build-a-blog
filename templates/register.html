@@ -3,10 +3,10 @@
 {% block content %}
     <h1>Register to become a contributor</h1>
     <form class='registration-form' action='/register' method='POST'>
-        <lable>
+        <label>
             Email
-            <input type='email' value='{{ email }}' />
-        </lable>
+            <input type='email' name='email' value='{{ email }}' />
+        </label>
         <label>
             Password
             <input type='password' name='password' />
@@ -15,5 +15,6 @@
             Verify Password
             <input type='password' name='verify' />
         </label>
+        <button type='submit'>Register</button>
     </form>
 {% endblock %}

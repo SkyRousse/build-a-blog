@@ -1,3 +1,58 @@
+body {
+    color: #767478;
+}
+
+h1 {
+    font-size: 2.25rem;
+    text-align: center;
+    color: lightslategray;
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: #7b767e;
+}
+
+ul.flash-errors {
+    list-style-type: none;
+}
+
+label, button {
+    display: block;
+    margin: 20px 0px;
+}
+
+.post-title{
+    margin-bottom: 7px;
+}
+
+.post-time {
+    margin-top: 7px;
+}
+
+.user-info {
+    float: right;
+    color: #bdb9b9;
+}
+
+.user-info span {
+    color: lightslategray;
+}
+
+.wrapper {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 nav {
     text-align: center;
 }
@@ -19,7 +74,7 @@ nav a {
 }
 
 .success {
-    color: green;
+    color: #17c517;
 }
 
 .warning {

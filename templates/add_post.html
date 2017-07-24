@@ -1,10 +1,13 @@
+{% extends "base.html"%}
+
+{% block content %}
 <h1>Add a new post</h1>
 
 <form class='add_post' action='/add_post' method='POST'>
-    <lable>
+    <label>
         Title
         <input type='text' name='post-title' />
-    </lable>
+    </label>
     <label>
         Body
         <textarea name='post-body'></textarea>
@@ -13,7 +16,9 @@
         Category
         <select name='post-category'>
             {% for category in categories %}
-                <option value='{{ category }}'>{{ category }}</option>
+                <option value='{{ category.name }}'>{{ category.name }}</option>
             {% endfor %}
         </select>
+    <button type='submit'>Add Post</button>
 </form>
+{% endblock %}

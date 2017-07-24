@@ -2,30 +2,36 @@
 <html>
     <head>
         <title>{{ title }}</title>
-        <link type='text/css' rel='stylsheet' href="{{ url_for('static', filename='styles.css') }}" />
+        <link type='text/css' rel='stylesheet' href="{{ url_for('static', filename='styles.css')}}" >
     </head>
     <body>
-        <nav class='top-menu'>
-            <ul>
-                <li><a href='/' alt='home'>PyBlog</a></li>
-                {% if session['email']}
-                    <li><a href="{{ url_for('logout') }}" alt='log out'>Log out</a></li>
-                {% else %}
-                    <li><a href="{{ url_for('login') }}" alt='log in'>Login</a></li>
-                    <li><a href="{{ url_for('register') }}" alt='register'>Register</a></li>
-                {% endif %}
-            </ul>
-        </nav>
+        <div class="wrapper">
+            {% if session['email'] %}
+                <p class='user-info'>logged in as: <span>{{ session['email'] }}</span></p>
+            {% endif %}
+            <nav class='top-menu clearfix'>
+                <ul>
+                    <li><a href='/' alt='home'>PyBlog</a></li>
+                    {% if session['email'] %}
+                        <li><a href="{{ url_for('logout') }}" alt='log out'>Log out</a></li>
+                        <li><a href="{{ url_for('add_post') }}" alt='add new blog post'>New post</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('login') }}" alt='log in'>Login</a></li>
+                        <li><a href="{{ url_for('register') }}" alt='register'>Register</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
 
-        {% with messages = get_flashed_messages(with_categories=True) %}
-            <ul class='flash-errors'>
-                {% for category, message in messages %}
-                    <li class='{{ category }}'>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endwith %}
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                <ul class='flash-errors'>
+                    {% for category, message in messages %}
+                        <li class='{{ category }}'>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endwith %}
 
-        {% block content %}
-        {% endblock %}
+            {% block content %}
+            {% endblock %}
+        </div>
     </body>
 </html>

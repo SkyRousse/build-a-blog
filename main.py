@@ -58,33 +58,33 @@ def index():
     posts = Post.query.all()
     return render_template('index.html', title='PyBlog', posts=posts)
 
-@ap.before_request
+@app.before_request
 def require_login():
     login_routes = ['add_post']
     if request.endpoint in login_routes and 'email' not in session:
         return redirect('/login')
 
-@app.route('/register' methods=['POST', 'GET'])
-    def register():
-        if request.method == "POST":
-            email = request.form['email']
-            password = request.form['password']
-            verify = request.form['verify']
+@app.route('/register', methods=['POST', 'GET'])
+def register():
+    if request.method == "POST":
+        email = request.form['email']
+        password = request.form['password']
+        verify = request.form['verify']
 
-            existing_user = User.query.filter_by(email=email).first()
-            if not existing_user:
-                new_user = User(email, password)
-                db.session.add(new_user)
-                db.session.commit()
-                session['email'] = email
-                flash("sucess, thanks for registering", "success")
-                return redirect('/')
-            else:
-                flash("oops, user already exists. Login below", "warning")
-                return redirect('/login')
-
+        existing_user = User.query.filter_by(email=email).first()
+        if not existing_user:
+            new_user = User(email, password)
+            db.session.add(new_user)
+            db.session.commit()
+            session['email'] = email
+            flash("sucess, thanks for registering", "success")
+            return redirect('/')
         else:
-            render_template('/register.html')
+            flash("oops, user already exists. Login below", "warning")
+            return redirect('/login')
+
+    else:
+        return render_template('register.html')
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -98,7 +98,8 @@ def login():
             flash('Logged in successfully', 'success')
             return redirect('/')
         else:
-            flash('Login info incorrect, please try again')
+            flash('Login info incorrect, please try again', 'error')
+            return render_template('login.html')
     else:
         return render_template('login.html')
 
@@ -109,19 +110,22 @@ def logout():
     flash('you have been logged out', 'warning')
     return redirect('/')
 
-@app.route('add_post' methods=['POST'])
+@app.route('/add_post', methods=['POST', 'GET'])
 def add_post():
     categories = Category.query.all()
     if request.method == 'POST':
         title = request.form['post-title']
         body = request.form['post-body']
-        category = request.form['post-category']
+        post_category = request.form['post-category']
+        category = Category.query.filter_by(name=post_category).first()
         user = User.query.filter_by(email=session['email']).first()
         new_post = Post(title, body, category, user)
         db.session.add(new_post)
         db.session.commit()
+        flash('new post successfully created', 'success')
+        return redirect('/')
     else:
-        render_template('add_post.html', categories=categories)
+        return render_template('add_post.html', categories=categories)
 
 if __name__ == '__main__':
     app.run()
